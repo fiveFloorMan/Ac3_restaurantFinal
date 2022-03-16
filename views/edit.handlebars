@@ -13,14 +13,14 @@
       required/>
     </div>
     <div class="mb-3">
-      <label for="name_en" class="form-label">英文店名<span class="text-danger">*</span></label>
+      <label for="nameEn" class="form-label">英文店名<span class="text-danger">*</span></label>
       <input
         type="text"
         class="form-control"
-        id="name_en"
+        id="nameEn"
         placeholder="Alpha Tech Theme Restaurant"
-        name="name_en"
-        value="{{restaurant.name_en}}"
+        name="nameEn"
+        value="{{restaurant.nameEn}}"
         required
       />
     </div>
@@ -77,13 +77,13 @@
       required/>
     </div>
     <div class="mb-3">
-      <label for="google_map" class="form-label">Google地圖連結<span class="text-danger">*</span></label>
+      <label for="googleMap" class="form-label">Google地圖連結<span class="text-danger">*</span></label>
       <input
         type="url"
         class="form-control"
-        id="google_map"
-        name="google_map"
-        value="{{restaurant.google_map}}"
+        id="googleMap"
+        name="googleMap"
+        value="{{restaurant.googleMap}}"
       required/>
     </div>
     <div class="mb-3">
@@ -106,8 +106,8 @@
         id="description"
         rows="3"
         name="description"
-    required</div>
-      >{{restaurant.description}}</textarea>
+        required>{{restaurant.description}}</textarea>
+    </div>
     <div class="text-center">
       <button type="submit" class="btn btn-primary">
         儲存修改

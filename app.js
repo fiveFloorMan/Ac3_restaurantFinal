@@ -1,29 +1,16 @@
 const express = require('express')
-const mongoose = require('mongoose')
-const RestaurantModel = require('./models/restaurant-list')
+
 const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
 
 const routes = require('./routes')
+
+require('./config/mongoose')
 const app = express()
 const port = 3000
 
-mongoose.connect('mongodb://localhost/restaurant', { useNewUrlParser: true, useUnifiedTopology: true })
-
-const db = mongoose.connection
-
-db.on('error', () => {
-  console.log('mongoose error')
-})
-
-db.once('open', () => {
-  console.log('mongoose connedted!')
-})
-
 // require 渲染的工具
 const exphbs = require('express-handlebars')
-// 可能是無用的變數
-const restaurantsList = require('./restaurant.json')
 
 // set engine
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
