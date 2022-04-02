@@ -4,6 +4,7 @@
 const express = require('express')
 const router = express.Router()
 const User = require('../../models/user') // users 資料庫綱要
+const passport = require('passport')
 
 // url = http://localhost3000/users/login
 router.get('/login', (req, res) => {
@@ -12,9 +13,11 @@ router.get('/login', (req, res) => {
 
 // url = http://localhost3000/users/login
 // 接住login(btn)回傳的userLoginData
-router.post('/login', (req, res) => {
-  
-})
+router.post('/login', passport.authenticate('local', {
+  successRedirect:'/',
+  failureRedirect:'/users/login'
+})) 
+
 
 // url = http://localhost3000/users/register
 // 註冊頁送出資料
