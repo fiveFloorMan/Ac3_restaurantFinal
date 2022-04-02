@@ -50,6 +50,7 @@ router.post('/register', (req, res) => {
 })
 
 // url = http://localhost3000/users/logout
+// 登出
 router.get('/logout', (req, res) => {
   req.logout()
   res.redirect('/users/login')
