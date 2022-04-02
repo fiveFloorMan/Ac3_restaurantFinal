@@ -5,6 +5,7 @@ const express = require('express')
 const router = express.Router()
 const User = require('../../models/user') // users 資料庫綱要
 const passport = require('passport')
+const bcrypt = require('bcryptjs')
 
 // url = http://localhost3000/users/login
 router.get('/login', (req, res) => {
@@ -53,11 +54,14 @@ router.post('/register', (req, res) => {
         confirmPassword
       })
     } else {
-      return User.create({
+      return bcrypt
+        .genSalt(10)
+        .then(salt => bcrypt.hash(password, salt))
+        .then(hash => User.create({
         name,
         email,
-        password
-      })
+        password: hash
+      }))
         .then(() => res.redirect('/'))
         .catch(error => console.log(error))
     }
