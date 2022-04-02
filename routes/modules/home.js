@@ -11,7 +11,8 @@ const RestaurantModel = require('../../models/restaurant-list')
 // route 首頁
 router.get('/', (req, res) => {
   // Controller
-  RestaurantModel.find()
+  const userId = req.user._id
+  RestaurantModel.find({ userId: userId })
     .lean()
     .then(restaurant => {
       res.render('index', { restaurant: restaurant })

@@ -9,9 +9,10 @@ router.get('/new', (req, res) => {
   res.render('new')
 })
 // route for show page (specific restaurant)
-router.get('/:restaurant_id', (req, res) => {
-  const id = req.params.restaurant_id
-  return RestaurantModel.findById(id)
+router.get('/:id', (req, res) => {
+  const userId = req.user._id
+  const _id = req.params.id
+  return RestaurantModel.findOne({ _id, userId })
     .lean()
     .then((restaurant) => {
       res.render('show', { restaurant: restaurant })
@@ -20,43 +21,40 @@ router.get('/:restaurant_id', (req, res) => {
 })
 // route for catch new restaurant data
 router.post('/', (req, res) => {
-  const name = req.body.name
-  const nameEn = req.body.nameEn
-  const category = req.body.category
-  const image = req.body.image
-  const location = req.body.location
-  const phone = req.body.phone
-  const googleMap = req.body.googleMap
-  const rating = req.body.rating
-  const description = req.body.description
-  return RestaurantModel.create({ name, nameEn, category, image, location, phone, googleMap, rating, description })
+  const userId = req.user._id
+  const {name, nameEn, category, image, location, phone, googleMap, rating, description} = req.body
+  return RestaurantModel.create({ userId, name, nameEn, category, image, location, phone, googleMap, rating, description })
     .then(() => res.redirect('/'))
     .catch(error => console.log(error))
 })
-// route for Catch Edit restaurant data
-router.put('/:_id', (req, res) => {
-  const id = req.params._id
-  return RestaurantModel.findById(id)
-    .then(restaurantEdit => {
-      return restaurantEdit.update(req.body)
-    })
-    .then(() => res.redirect(`/restaurants/${id}`))
-    .catch(error => console.log(error))
-})
 // route for Edit
-router.get('/:_id/edit', (req, res) => {
-  const id = req.params._id
-  return RestaurantModel.findById(id)
+router.get('/:id/edit', (req, res) => {
+  const userId = req.user._id
+  const _id = req.params.id
+  return RestaurantModel.findOne({ _id, userId})
     .lean()
     .then((restaurant) => {
       res.render('edit', { restaurant: restaurant })
     })
     .catch(error => console.log(error))
 })
+// route for Catch Edit restaurant data
+router.put('/:id', (req, res) => {
+  const userId = req.user._id
+  const _id = req.params.id
+  return RestaurantModel.findOne({ _id, userId})
+    .then(restaurantEdit => {
+      return restaurantEdit.update(req.body)
+    })
+    .then(() => res.redirect(`/restaurants/${_id}`))
+    .catch(error => console.log(error))
+})
+
 // route for delete
-router.delete('/:_id', (req, res) => {
-  const id = req.params._id
-  return RestaurantModel.findById(id)
+router.delete('/:id', (req, res) => {
+  const userId = req.user._id
+  const _id = req.params.id
+  return RestaurantModel.findOne({ _id, userId})
     .then(restaurant => restaurant.remove())
     .then(() => res.redirect('/'))
     .catch(error => console.log(error))
