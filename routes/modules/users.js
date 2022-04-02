@@ -4,18 +4,18 @@
 const express = require('express')
 const router = express.Router()
 
-// url = http://localhost3000/user/login
+// url = http://localhost3000/users/login
 router.get('/login', (req, res) => {
   res.render('login')
 })
 
-// url = http://localhost3000/user/login
+// url = http://localhost3000/users/login
 // 接住login(btn)回傳的userLoginData
 router.post('/login', (req, res) => {
   
 })
 
-// url = http://localhost3000/user/register
+// url = http://localhost3000/users/register
 // 註冊頁
 router.get('/register', (req, res) => {
   res.render('register')
