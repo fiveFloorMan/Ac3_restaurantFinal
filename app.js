@@ -2,7 +2,7 @@ const express = require('express')
 const session = require('express-session')
 const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
-
+const flash = require('connect-flash')
 const routes = require('./routes')
 
 const usePassport = require('./config/passport')
@@ -38,10 +38,16 @@ app.use(methodOverride('_method'))
 // 會員登入系統
 usePassport(app)
 
-// 會員是否登入 (所有的views都可以存取res.locals)
+// 成功與錯誤訊息
+app.use(flash())
+//外掛
 app.use((req, res, next) => {
+  // 會員是否登入 (所有的views都可以存取res.locals)
   res.locals.isAuthenticated = req.isAuthenticated()
   res.locals.user = req.user
+  // login & register 的message 
+  res.locals.success_msg = req.flash('success_msg')
+  res.locals.warning_msg = req.flash('warning_msg')
   next()
 })
 
