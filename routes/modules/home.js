@@ -1,4 +1,5 @@
-
+// 這裡是首頁
+// 這邊是 url: localhost3000/XX 的route
 const express = require('express')
 const router = express.Router()
 const restaurantsList = require('../../restaurant.json')

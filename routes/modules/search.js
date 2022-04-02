@@ -1,3 +1,5 @@
+// 這裡是搜尋頁
+// 這邊是 url:http:localhost3000//search?keyword=XXX 的route
 const express = require('express')
 const router = express.Router()
 const restaurantsList = require('../../restaurant.json')

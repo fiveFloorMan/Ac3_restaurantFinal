@@ -1,3 +1,5 @@
+//這裡是 個別餐廳的CRUD
+//這邊是 url:localhost:3000/restaurant/XXXX 的route
 const express = require('express')
 const router = express.Router()
 const RestaurantModel = require('../../models/restaurant-list')
@@ -31,7 +33,7 @@ router.post('/', (req, res) => {
     .then(() => res.redirect('/'))
     .catch(error => console.log(error))
 })
-// route for Catch Edit restaurant data (可能會有問題的地方)
+// route for Catch Edit restaurant data
 router.put('/:_id', (req, res) => {
   const id = req.params._id
   return RestaurantModel.findById(id)

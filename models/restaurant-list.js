@@ -1,3 +1,4 @@
+// 這裡是restaurant的資料庫綱要
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema // 資料庫綱要
 

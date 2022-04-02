@@ -1,3 +1,5 @@
+//這裡是Npm run seed之後會跑的code
+
 const db = require('../../config/mongoose')
 // restaurant的格式
 const RestaurantModel = require('../restaurant-list')
