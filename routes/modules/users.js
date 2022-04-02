@@ -18,7 +18,6 @@ router.post('/login', passport.authenticate('local', {
   failureRedirect:'/users/login'
 })) 
 
-
 // url = http://localhost3000/users/register
 // 註冊頁送出資料
 router.get('/register', (req, res) => {
@@ -49,4 +48,11 @@ router.post('/register', (req, res) => {
   })
   .catch(error => console.log(error))
 })
+
+// url = http://localhost3000/users/logout
+router.get('/logout', (req, res) => {
+  req.logout()
+  res.redirect('/users/login')
+})
+
 module.exports = router
