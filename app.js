@@ -1,5 +1,5 @@
 const express = require('express')
-
+const session = require('express-session')
 const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
 
@@ -15,6 +15,14 @@ const exphbs = require('express-handlebars')
 // set engine
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
+
+// session(使用者登入憑證)
+app.use(session({
+  secret: 'RestaurantsUserSecret',
+  resave: false, 
+  saveUninitialized: true
+}))
+// Ps: resave & saveUninitialized 沒微調也能正常使用
 
 // 告知靜態檔案位置
 app.use(express.static('public'))
