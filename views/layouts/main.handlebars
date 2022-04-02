@@ -22,8 +22,25 @@
         我的餐廳清單
       </a>
       <div class="text-right">
-        <a href="/restaurants/new" >
-          <button class="btn btn-success">Create</button></a>
+        {{#if isAuthenticated}}
+        {{!-- cookies 有會員資料 --}}
+          HELLO,{{ user.name }}
+            <a href="/users/logout" >
+              <button class="btn btn-success">Logout</button>
+            </a>
+            <a href="/restaurants/new" >
+              <button class="btn btn-success">Create</button>
+            </a>
+        {{else}}
+        {{!-- cookies 沒有會員資料 --}}
+          <a href="/users/login" >
+            <button class="btn btn-success">Login</button>
+          </a>
+          <a href="/users/login" >
+            <button class="btn btn-secondary">Create</button>
+          </a>
+        {{/if}}
+
       </div>
     </div>
   </nav>

@@ -13,14 +13,11 @@ router.use('/users', users)
 // url: localhost3000/search
 router.use('/search',authenticator, search)
 
-
 // url: localhost3000/restaurants
 router.use('/restaurants',authenticator, restaurants)
 
 // url: localhost3000/
 router.use('/',authenticator, home)
-
-
 
 // 匯出路由器
 module.exports = router

@@ -35,7 +35,15 @@ app.use(bodyParser.urlencoded({ extended: true }))
 // 告知使用method-override
 app.use(methodOverride('_method'))
 
+// 會員登入系統
 usePassport(app)
+
+// 會員是否登入 (所有的views都可以存取res.locals)
+app.use((req, res, next) => {
+  res.locals.isAuthenticated = req.isAuthenticated()
+  res.locals.user = req.user
+  next()
+})
 
 // 使用./models/routes
 app.use(routes)
