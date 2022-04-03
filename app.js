@@ -23,7 +23,7 @@ app.set('view engine', 'handlebars')
 
 // session(使用者登入憑證)
 app.use(session({
-  secret: 'RestaurantsUserSecret',
+  secret: process.env.SESSION_SECRET,
   resave: false, 
   saveUninitialized: true
 }))
