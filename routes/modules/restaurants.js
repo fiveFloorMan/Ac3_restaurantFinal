@@ -1,5 +1,5 @@
-//這裡是 個別餐廳的CRUD
-//這邊是 url:localhost:3000/restaurant/XXXX 的route
+// 這裡是 個別餐廳的CRUD
+// 這邊是 url:localhost:3000/restaurant/XXXX 的route
 const express = require('express')
 const router = express.Router()
 const RestaurantModel = require('../../models/restaurant-list')
@@ -22,7 +22,7 @@ router.get('/:id', (req, res) => {
 // route for catch new restaurant data
 router.post('/', (req, res) => {
   const userId = req.user._id
-  const {name, nameEn, category, image, location, phone, googleMap, rating, description} = req.body
+  const { name, nameEn, category, image, location, phone, googleMap, rating, description } = req.body
   return RestaurantModel.create({ userId, name, nameEn, category, image, location, phone, googleMap, rating, description })
     .then(() => res.redirect('/'))
     .catch(error => console.log(error))
@@ -31,7 +31,7 @@ router.post('/', (req, res) => {
 router.get('/:id/edit', (req, res) => {
   const userId = req.user._id
   const _id = req.params.id
-  return RestaurantModel.findOne({ _id, userId})
+  return RestaurantModel.findOne({ _id, userId })
     .lean()
     .then((restaurant) => {
       res.render('edit', { restaurant: restaurant })
@@ -42,7 +42,7 @@ router.get('/:id/edit', (req, res) => {
 router.put('/:id', (req, res) => {
   const userId = req.user._id
   const _id = req.params.id
-  return RestaurantModel.findOne({ _id, userId})
+  return RestaurantModel.findOne({ _id, userId })
     .then(restaurantEdit => {
       return restaurantEdit.update(req.body)
     })
@@ -54,7 +54,7 @@ router.put('/:id', (req, res) => {
 router.delete('/:id', (req, res) => {
   const userId = req.user._id
   const _id = req.params.id
-  return RestaurantModel.findOne({ _id, userId})
+  return RestaurantModel.findOne({ _id, userId })
     .then(restaurant => restaurant.remove())
     .then(() => res.redirect('/'))
     .catch(error => console.log(error))

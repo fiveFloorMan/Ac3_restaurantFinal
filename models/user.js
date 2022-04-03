@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const userSchema = new Schema({
   name: {
-    type: String,
+    type: String
   },
   email: {
     type: String,
@@ -19,5 +19,5 @@ const userSchema = new Schema({
   }
 })
 
-//匯出'User', 讓其他檔案使用
+// 匯出'User', 讓其他檔案使用
 module.exports = mongoose.model('User', userSchema)

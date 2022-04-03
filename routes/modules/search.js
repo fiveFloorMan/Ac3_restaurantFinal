@@ -2,7 +2,6 @@
 // 這邊是 url:http:localhost3000/search?keyword=XXX 的route
 const express = require('express')
 const router = express.Router()
-const restaurantsList = require('../../restaurant.json')
 
 // Restaurant model
 const RestaurantModel = require('../../models/restaurant-list')
@@ -14,14 +13,14 @@ router.get('/', (req, res) => {
     res.redirect('/')
   }
   const userId = req.user._id
-  RestaurantModel.find({userId: userId})
+  RestaurantModel.find({ userId: userId })
     .lean()
     .then(restaurant => {
       console.log('restaurant:', restaurant)
       const keyword = req.query.keywords.trim().toLowerCase() // 處理過的輸入的搜尋字眼
       const restaurantSearch = []
-      for (let i = 0; i < restaurant.length; i++){
-        if (restaurant[i].name.toLowerCase().trim().includes(keyword) || restaurant[i].category.trim().includes(keyword)){
+      for (let i = 0; i < restaurant.length; i++) {
+        if (restaurant[i].name.toLowerCase().trim().includes(keyword) || restaurant[i].category.trim().includes(keyword)) {
           restaurantSearch.push(restaurant[i])
         }
       }

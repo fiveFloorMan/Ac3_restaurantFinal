@@ -9,21 +9,20 @@ const auth = require('./modules/auth') // 引入facebook login
 
 const { authenticator } = require('../middleware/auth') // 掛載 middleware
 
-
 // url: localhost3000/user
 router.use('/users', users)
 
 // url: localhost3000/search
-router.use('/search',authenticator, search)
+router.use('/search', authenticator, search)
 
 // url: localhost3000/restaurants
-router.use('/restaurants',authenticator, restaurants)
+router.use('/restaurants', authenticator, restaurants)
 
 // 掛載模組
 router.use('/auth', auth)
 
 // url: localhost3000/
-router.use('/',authenticator, home)
+router.use('/', authenticator, home)
 
 // 匯出路由器
 module.exports = router

@@ -15,9 +15,9 @@ router.get('/login', (req, res) => {
 // url = http://localhost3000/users/login
 // 接住login(btn)回傳的userLoginData
 router.post('/login', passport.authenticate('local', {
-  successRedirect:'/',
-  failureRedirect:'/users/login'
-})) 
+  successRedirect: '/',
+  failureRedirect: '/users/login'
+}))
 
 // url = http://localhost3000/users/register
 // 註冊頁送出資料
@@ -30,10 +30,10 @@ router.post('/register', (req, res) => {
   const { name, email, password, confirmPassword } = req.body
   const errors = []
   if (!email || !password || !confirmPassword) {
-    errors.push({ message: '除了姓名, 其他欄位都是必填的喔'})
+    errors.push({ message: '除了姓名, 其他欄位都是必填的喔' })
   }
   if (password !== confirmPassword) {
-    errors.push({ message: '密碼與確認密碼不相符'})
+    errors.push({ message: '密碼與確認密碼不相符' })
   }
   if (errors.length) {
     return res.render('register', {
@@ -44,8 +44,8 @@ router.post('/register', (req, res) => {
       confirmPassword
     })
   }
-  User.findOne({ email: email}).then(user =>{
-    if (user){
+  User.findOne({ email: email }).then(user => {
+    if (user) {
       console.log('這是已經註冊過的帳號')
       res.render('register', {
         name,
@@ -58,15 +58,15 @@ router.post('/register', (req, res) => {
         .genSalt(10)
         .then(salt => bcrypt.hash(password, salt))
         .then(hash => User.create({
-        name,
-        email,
-        password: hash
-      }))
+          name,
+          email,
+          password: hash
+        }))
         .then(() => res.redirect('/'))
         .catch(error => console.log(error))
     }
   })
-  .catch(error => console.log(error))
+    .catch(error => console.log(error))
 })
 
 // url = http://localhost3000/users/logout
